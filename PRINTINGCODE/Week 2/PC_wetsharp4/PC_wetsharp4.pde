@@ -1,4 +1,7 @@
 /*  Assignment 2 Code: WET & SHARP
+
+
+//puppies
  _________________________________________________________________ */
 
 PGraphics canvas;
@@ -22,7 +25,7 @@ void setup()
   //float noiseVal;
   //float noiseScale=0.02;
 
-
+  
 
   canvas = createGraphics(canvas_width, canvas_height, P2D);
 
