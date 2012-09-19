@@ -125,7 +125,7 @@ void setup()
 
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-  canvas.save("grab.png");
+  canvas.save("grab.tiff");
 }
 
 /*  Calculate resizing
