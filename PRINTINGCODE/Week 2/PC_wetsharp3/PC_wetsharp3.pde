@@ -94,7 +94,7 @@ void setup()
   canvas.vertex(3850, 1895);
   
   canvas.stroke(0);
-  canvas.arc(5000,3000,500,500,0,PI/2); // bottom right arc
+  canvas.arc(5000,3000,500,600,0,PI/2); // bottom right arc
   canvas.arc(3800,1900,800,800, PI, TWO_PI-PI/2);
   canvas.endShape();
 
