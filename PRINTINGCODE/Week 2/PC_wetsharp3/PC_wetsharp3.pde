@@ -40,7 +40,6 @@ void setup()
   //canvas.fill(0, 2);
   canvas.fill(255);
   canvas.stroke(0);  
-
   canvas.vertex(2300, 1295); // (tip)
   canvas.vertex(1250, 3625);
   canvas.vertex(2300, 3450); // (center)
@@ -49,7 +48,6 @@ void setup()
   //canvas.fill(0, 15);
   canvas.fill(255);
   canvas.stroke(0);  
-
   canvas.vertex(2300, 1295); // (tip)
   canvas.vertex(2300, 3450); // (center)
   canvas.vertex(3350, 3625); // (corner)
@@ -59,16 +57,15 @@ void setup()
   //canvas.fill(0, 35);
   canvas.fill(255);
   canvas.stroke(0);  
-
   canvas.vertex(1250, 3625); // (L corner)
   canvas.vertex(2300, 3450); // (center)
   canvas.vertex(3350, 3625); // (corner)
   canvas.endShape();
 
+  
+  
   // Bubble shape
 
-  
-  
   canvas.beginShape(TRIANGLES); 
   canvas.fill(255);
   canvas.ellipseMode(CENTER);
@@ -95,6 +92,10 @@ void setup()
   canvas.vertex(x1+4700, y1+2750);
   
   canvas.vertex(3850, 1895);
+  
+  canvas.stroke(0);
+  canvas.arc(5000,3000,500,500,0,PI/2); // bottom right arc
+  canvas.arc(3800,1900,800,800, PI, TWO_PI-PI/2);
   canvas.endShape();
 
   //canvas.pushMatrix();
