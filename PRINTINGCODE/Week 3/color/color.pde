@@ -27,23 +27,6 @@ void setup()
   smooth();
   colorMode(HSB, 1, 1, 1, 255);  
 
-  // My color list
-  //  ColorList colors = new ColorList();
-  //
-  //  colors.add( NamedColor.BURLYWOOD );
-  //  colors.add( NamedColor.CHOCOLATE );
-  //  colors.add( NamedColor.CORAL );
-  //  colors.add( NamedColor.DARKGOLDENROD );
-  //  colors.add( NamedColor.DARKGRAY );
-  //  colors.add( NamedColor.DARKOLIVEGREEN );
-  //  colors.add( NamedColor.ROSYBROWN );
-  //  colors.add( NamedColor.DARKRED );
-  //  colors.add( NamedColor.DIMGRAY );
-  //  colors.add( NamedColor.TOMATO );
-  //  colors.add( NamedColor.INDIGO );
-  //  colors.add( NamedColor.PERU );
-  //  colors.add( NamedColor.ORANGERED );
-
   ColorTheme t = new ColorTheme ("alis theme");
   
   t.addRange("INDIGO", 0.15);
