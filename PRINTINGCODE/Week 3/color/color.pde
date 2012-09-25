@@ -25,25 +25,48 @@ void setup()
   size(1300, 850);
   background(100);
   smooth();
-  colorMode(HSB, 360, 100, 100, 255);  
+  colorMode(HSB, 1, 1, 1, 255);  
 
   // My color list
   //  ColorList colors = new ColorList();
-  //  
-  //  colors.add( NamedColor.BLUE );
-  //  colors.add( NamedColor.BLANCHEDALMOND );
+  //
+  //  colors.add( NamedColor.BURLYWOOD );
+  //  colors.add( NamedColor.CHOCOLATE );
   //  colors.add( NamedColor.CORAL );
-  //  colors.add( NamedColor.PLUM );
-  //  colors.add( NamedColor.LIME );
+  //  colors.add( NamedColor.DARKGOLDENROD );
+  //  colors.add( NamedColor.DARKGRAY );
+  //  colors.add( NamedColor.DARKOLIVEGREEN );
+  //  colors.add( NamedColor.ROSYBROWN );
+  //  colors.add( NamedColor.DARKRED );
+  //  colors.add( NamedColor.DIMGRAY );
+  //  colors.add( NamedColor.TOMATO );
+  //  colors.add( NamedColor.INDIGO );
   //  colors.add( NamedColor.PERU );
+  //  colors.add( NamedColor.ORANGERED );
 
+  ColorTheme t = new ColorTheme ("alis theme");
+  
+  t.addRange("INDIGO", 0.15);
+  t.addRange("DARKGOLDENROD", 0.15);
+  t.addRange("TOMATO", 0.05);
+
+  
+  FloatRange h = new FloatRange(0.1, 0.8);
+  FloatRange s = new FloatRange(0.3, 0.8);
+  FloatRange b = new FloatRange(0.3, 1);
+  ColorRange range = new ColorRange(h, s, b, "alis range");
+  t.addRange(range, null, 0.05);
+  
+  ColorList randomList = t.getColors(5);
+  
+  // this is where I'm messed up on the for loop
+  
   canvas = createGraphics(canvas_width, canvas_height, P2D);
-
   calculateResizeRatio();
 
 
-  
-  
+
+
   canvas.beginDraw();
   canvas.background(255);
   canvas.smooth();  
@@ -54,26 +77,27 @@ void setup()
   canvas.ellipseMode(CORNER);
 
   canvas.fill(0, 50, 50, 200);
-  canvas.ellipse(1350, 1480, 1450, 1450);      // circle 1 (high)
+  canvas.ellipse(1350, 1480, 1450, 1450);      // circle 1 (top right shape)
 
   canvas.fill(0, 50, 50, 200);
-  canvas.ellipse(1200, 1800, 1200, 1200);      // circle 2
+  canvas.ellipse(1200, 1800, 1200, 1200);      // circle 2 (left shape)
   
+  canvas.fill(0, 100, 100, 255);
+  canvas.ellipse(2100, 2200, 200, 200);        // middle embedded circle
+ 
   canvas.noStroke();
   canvas.fill(2, 2, 2, 20);
-  canvas.ellipse(800, 900, 3000, 3000);        // giant circle
+  canvas.ellipse(800, 900, 3000, 3000);        // giant transparent circle
 
-//  int [] coords = {
-//  2200, 2200, 2500, 1900, 2800, 2200, 3400, 1700, 3800, 1800, 3900, 1760, 4000, 1750, 4020, 1740, 4100, 1770, 4350, 1610, 4100, 1440, 4000, 1280, 4200, 1220, 4500, 900, 4700, 1100, 5000, 1200, 5200, 1500, 5210, 1600, 5250, 1650, 5260, 1630, 5300, 1610, 5400, 1630, 5350, 1650, 5450, 1680, 5550, 1780, 5350, 1980, 5550, 2200, 5750, 2500, 5700, 2700, 5780, 2800, 5685, 3100, 5885, 3350, 5890, 3200, 5950, 3250, 5980, 3300, 5955, 3400, 6150, 3400, 6000, 3600, 6100, 3900
-//  };
-//  int i;
-//  
-//  canvas.fill(0,30,30,100);
-//  
-//  for (i = 0; i < coords.length; i +=2) 
-//  {
-//  canvas.line(coords[i], coords[i+1], 1000,500);
-//  }
+  //  int [] coords = {
+  //  2200, 2200, 2500, 1900, 2800, 2200, 3400, 1700, 3800, 1800, 3900, 1760, 4000, 1750, 4020, 1740, 4100, 1770, 4350, 1610, 4100, 1440, 4000, 1280, 4200, 1220, 4500, 900, 4700, 1100, 5000, 1200, 5200, 1500, 5210, 1600, 5250, 1650, 5260, 1630, 5300, 1610, 5400, 1630, 5350, 1650, 5450, 1680, 5550, 1780, 5350, 1980, 5550, 2200, 5750, 2500, 5700, 2700, 5780, 2800, 5685, 3100, 5885, 3350, 5890, 3200, 5950, 3250, 5980, 3300, 5955, 3400, 6150, 3400, 6000, 3600, 6100, 3900
+  //  };
+  //  int i;
+  //  for (i = 0; i < coords.length; i +=2){
+  //  canvas.line(coords[i], coords[i+1], 1000,500);
+  //  }
+
+  // organic line form
   
   canvas.noFill();
   canvas.strokeWeight(1);
@@ -123,19 +147,17 @@ void setup()
   canvas.endShape();
 
 
-  canvas.fill(0, 100, 100, 255);
-  canvas.ellipse(2100, 2200, 200, 200);    // middle circle
+
 
   canvas.fill(0, 100, 100, 255);
   canvas.ellipse(5800, 3800, 100, 100);   // bottom circle
-  
+
   canvas.fill(0, 100, 100, 255);
   canvas.ellipse(5900, 3900, 200, 200);   // big bottom circle
 
 
 
   canvas.endDraw();
-
   float resizedWidth = (float) canvas.width * ratio;
   float resizedHeight = (float) canvas.height * ratio;
 
