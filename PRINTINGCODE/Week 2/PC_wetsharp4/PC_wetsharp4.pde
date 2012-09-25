@@ -33,6 +33,7 @@ void setup()
 
   canvas.beginDraw();
   canvas.background(255);
+  canvas.smooth();
    //giant circle
   
   canvas.stroke(0,20);
