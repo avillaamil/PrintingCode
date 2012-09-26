@@ -25,25 +25,24 @@ void setup()
   size(1300, 850);
   background(100);
   smooth();
-  colorMode(HSB, 1, 1, 1, 255);  
 
   ColorTheme t = new ColorTheme ("alis theme");
-  
-  t.addRange("INDIGO", 0.15);
-  t.addRange("DARKGOLDENROD", 0.15);
-  t.addRange("TOMATO", 0.05);
 
-  
-  FloatRange h = new FloatRange(0.1, 0.8);
+ t.addRange("INDIGO", 0.05);
+  t.addRange("TOMATO", 0.05);
+  t.addRange("DARKGOLDENROD", 0.05);
+
+
+  FloatRange h = new FloatRange(0.2, 0.4);
   FloatRange s = new FloatRange(0.3, 0.8);
   FloatRange b = new FloatRange(0.3, 1);
   ColorRange range = new ColorRange(h, s, b, "alis range");
   t.addRange(range, null, 0.05);
-  
+
   ColorList randomList = t.getColors(5);
-  
+
   // this is where I'm messed up on the for loop
-  
+
   canvas = createGraphics(canvas_width, canvas_height, P2D);
   calculateResizeRatio();
 
@@ -53,23 +52,29 @@ void setup()
   canvas.beginDraw();
   canvas.background(255);
   canvas.smooth();  
+  canvas.colorMode(HSB, 1, 1, 1, 255);  
+
   //canvas.noStroke();
 
   // SHAPES STARTING
 
   canvas.ellipseMode(CORNER);
 
-  canvas.fill(0, 50, 50, 200);
+  TColor c0 = randomList.get(0);
+  canvas.fill(c0.hue(), c0.saturation(), c0.brightness(), 255);
   canvas.ellipse(1350, 1480, 1450, 1450);      // circle 1 (top right shape)
 
-  canvas.fill(0, 50, 50, 200);
+  TColor c1 = randomList.get(1);
+  canvas.fill(c1.hue(), c1.saturation(), c1.brightness(), 200);
   canvas.ellipse(1200, 1800, 1200, 1200);      // circle 2 (left shape)
-  
-  canvas.fill(0, 100, 100, 255);
+
+  TColor c2 = randomList.get(2);
+  canvas.fill(c2.hue(), c2.saturation(), c2.brightness());
   canvas.ellipse(2100, 2200, 200, 200);        // middle embedded circle
- 
+
   canvas.noStroke();
-  canvas.fill(2, 2, 2, 20);
+  TColor c3 = randomList.get(3);
+  canvas.fill(c3.hue(), c3.saturation(), c3.brightness(), 20);
   canvas.ellipse(800, 900, 3000, 3000);        // giant transparent circle
 
   //  int [] coords = {
@@ -81,7 +86,7 @@ void setup()
   //  }
 
   // organic line form
-  
+
   canvas.noFill();
   canvas.strokeWeight(1);
   canvas.stroke(0);
@@ -132,10 +137,13 @@ void setup()
 
 
 
-  canvas.fill(0, 100, 100, 255);
+  TColor c4 = randomList.get(4);
+  canvas.fill(344, 100, 50);
   canvas.ellipse(5800, 3800, 100, 100);   // bottom circle
 
-  canvas.fill(0, 100, 100, 255);
+  //canvas.noStroke();
+  TColor c5 = randomList.get(4);
+  canvas.fill(c5.hue(), c5.saturation(), c5.brightness());
   canvas.ellipse(5900, 3900, 200, 200);   // big bottom circle
 
 
@@ -146,7 +154,7 @@ void setup()
 
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-  canvas.save("grabcolor.png");
+  canvas.save("grabcolor11.png");
 }
 
 /*  Calculate resizing
