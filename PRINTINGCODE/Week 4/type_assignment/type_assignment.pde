@@ -45,7 +45,7 @@ void setup() {
   //making it centered (focusing on the magenta)
   // compensating for color shifts
   
-  canvas.translate(((canvas.width/2)-(grp.getWidth()/2)-180), ((canvas.height/2)+(grp.getHeight()/2)-900));
+  canvas.translate(((canvas.width/2)-(grp.getWidth()/2)-180), ((canvas.height/2)+(grp.getHeight()/2)-300));
   
   //YELLOW
   for (int k=0; k<pnts.length; k++) {
@@ -57,7 +57,7 @@ void setup() {
   //CYAN
   for (int j=0; j<pnts.length; j++) {
     canvas.strokeWeight(4);
-    canvas.stroke(0, 255, 240, 50);
+    canvas.stroke(0, 255, 280, 50);
     canvas.line(pnts[j].x, pnts[j].y, pnts[j].x+300, pnts[j].y+150);
   }
 
@@ -69,11 +69,11 @@ void setup() {
   }
   
 
-  //  //BLACK
-  //  for (int t=0; t<pnts.length; t++) {
-  //    canvas.stroke(0);
-  //    canvas.line(pnts[t].x, pnts[t].y, pnts[t].x, pnts[t].y);
-  //  }
+  //Daker
+//    for (int t=0; t<pnts.length; t++) {
+//      canvas.stroke(255, 60, 220);
+//      canvas.line(pnts[t].x, pnts[t].y, pnts[t].x, pnts[t].y);
+//    }
 
   canvas.endDraw();
   float resizedWidth = (float) canvas.width * ratio;
