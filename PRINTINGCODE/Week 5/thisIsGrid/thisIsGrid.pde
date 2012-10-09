@@ -7,7 +7,7 @@ float ratioHeight = 1;
 float ratio = 1;
 
 
-/*  SETS UPS
+/*  SET UPS
  _________________________________________________________________ */
 
 void setup() { 
@@ -18,7 +18,8 @@ void setup() {
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
 
-  /*  Draw __________________________________________________________*/
+
+/*  Draw __________________________________________________________*/
 
   canvas.beginDraw();
   canvas.background(255);
