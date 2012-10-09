@@ -4,36 +4,48 @@ class ModularGrid
   int rows;
   float gutterSize;
   float pageMargin;
+  
+  // array called 'modules' inside the module class
   Module[][] modules;
   float moduleWidth;
   float moduleHeight;
   
-  ModularGrid(int _cols, int _rows, float _gutterSize, float _pageMargin)
-  {
+  // this constructor requires 4 arguments
+  ModularGrid(int _cols, int _rows, float _gutterSize, float _pageMargin){
     cols = _cols;
     rows = _rows;
     gutterSize = _gutterSize;
     pageMargin = _pageMargin;
     
+    //construct the array with these arguments 
     modules = new Module[cols][rows];
     
-    // cache the width of each column. Remember to cast as float, otherwise the columns will not line up
+  //construct the array with these arguments 
+    modules = new Module[cols][rows];
+    
+ 
+ // ~~~~~~~~~~~~~DEFINING WIDTH~~~~~~~~~~~~~~~~~~~   
     // First we find the width of the page without the pagemargin
-    float actualPageWidth = ((float)width - (2*pageMargin));
+    float actualPageWidth = ((float)canvas.width - (2*pageMargin));
     // then we find the gutter sizes. We subtract by 1 as the furthermost right module will not have a right-side gutter
     float totalGutterWidth = (cols-1) * gutterSize;
     // then we simply find the column size by subtracting the gutterwidth from the page size and dividing by number of cols
     moduleWidth = (actualPageWidth - totalGutterWidth) / (float)cols;
-    
-    // cache the height of each column. This is the exact same calculation as before, and we should probably put
-    float actualPageHeight = ((float)height - (2*pageMargin));
+
+
+ // ~~~~~~~~~~~~~DEFINING HEIGHT~~~~~~~~~~~~~~~~~~~     
+    // grid height = height of the canvas - the top & bottom page margins
+    float actualPageHeight = ((float)canvas.height - (2*pageMargin));
+    // the total height of our gutters is the height of each gutter * how many gutters (always 1 less than # of rows)
     float totalGutterHeight = (rows-1) * gutterSize;
+    // same process as above
     moduleHeight = (actualPageHeight - totalGutterHeight) / (float)rows;
-    
-    for(int i = 0; i < cols; i++)
-    {
-      for(int j = 0; j < rows; j++)
-      {
+
+    // modules get placed in a 2D array, the for loops are creating the rows and columns?
+    for(int i = 0; i < cols; i++){
+      for(int j = 0; j < rows; j++){
+        
+         // create array from the Module class and define the arguments the class requires
         modules[i][j] = new Module();
         modules[i][j].x = pageMargin + (i*moduleWidth) + (i*gutterSize);
         modules[i][j].y = pageMargin + (j*moduleHeight) + (j*gutterSize);
@@ -43,17 +55,13 @@ class ModularGrid
     }
   }
   
-  Module getRandomModule(int numModulesHorizontal, int numModulesVertical)
-  {
+  Module getRandomModule(int numModulesHorizontal, int numModulesVertical){
     // first we find all col and row indexes of unused modules
     ArrayList<int[]> notUsedIndexes = new ArrayList();
     
-    for(int i = 0; i < cols; i++)
-    {
-      for(int j = 0; j < rows; j++)
-      {
-        if(!modules[i][j].used)
-        {
+    for(int i = 0; i < cols; i++){
+      for(int j = 0; j < rows; j++){
+        if(!modules[i][j].used){
           int[] index = {i, j};
           notUsedIndexes.add(index);
         }
@@ -61,8 +69,7 @@ class ModularGrid
     }
     
     // if we didnt find any, return null
-    if(notUsedIndexes.size() == 0)
-    {
+    if(notUsedIndexes.size() == 0){
       return null; 
     }
     
@@ -73,23 +80,19 @@ class ModularGrid
     
     // if there are less modules to right side, make this the new hor number
     int modulesToRightEdge = cols - selectedCol;
-    if(modulesToRightEdge < numModulesHorizontal)
-    {
+    if(modulesToRightEdge < numModulesHorizontal){
       numModulesHorizontal = modulesToRightEdge;
     }
     
     // if there are less modules to the bottom, make this the new ver number
     int modulesToBottomEdge = rows - selectedRow;
-    if(modulesToBottomEdge < numModulesVertical)
-    {
+    if(modulesToBottomEdge < numModulesVertical){
       numModulesVertical = modulesToBottomEdge;
     }
     
     // now search first row for used modules to determine new hor number
-    for(int i = 0; i < numModulesHorizontal; i++)
-    {
-      if(modules[selectedCol + i][selectedRow].used)
-      {
+    for(int i = 0; i < numModulesHorizontal; i++){
+      if(modules[selectedCol + i][selectedRow].used){
         numModulesHorizontal = i;
       }
     }
@@ -98,14 +101,11 @@ class ModularGrid
     // we break out of both loops after we found a used module
     boolean usedFound = false;
     
-    for(int i = 0; i < numModulesVertical; i++)
-    {
+    for(int i = 0; i < numModulesVertical; i++){
       if(usedFound) break;
       
-      for(int j = 0; j < numModulesHorizontal; j++)
-      {
-        if(modules[selectedCol + j][selectedRow + i].used)
-        {
+      for(int j = 0; j < numModulesHorizontal; j++){
+        if(modules[selectedCol + j][selectedRow + i].used){
           numModulesVertical = i;
           usedFound = true;
           break;
@@ -114,10 +114,8 @@ class ModularGrid
     }
     
     // now set all modules covered by our new area to used = true
-    for(int i = 0; i < numModulesHorizontal; i++)
-    {
-      for(int j = 0; j < numModulesVertical; j++)
-      {
+    for(int i = 0; i < numModulesHorizontal; i++){
+      for(int j = 0; j < numModulesVertical; j++){
         modules[selectedCol + i][selectedRow + j].used = true;
       }
     }
@@ -139,18 +137,18 @@ class ModularGrid
   
   void display()
   {
-    noFill();
-    stroke(255, 0, 0, 100);
+    canvas.noFill();
+    canvas.stroke(255, 0, 0, 100);
     
     // draw the big bounding box
-    rect(pageMargin, pageMargin, width - (2*pageMargin), height - (2*pageMargin));
+    canvas.rect(pageMargin, pageMargin, width - (2*pageMargin), height - (2*pageMargin));
     
     // draw all modules
     for(int i = 0; i < cols; i++)
     {
       for(int j = 0; j < rows; j++)
       {
-        rect(modules[i][j].x, modules[i][j].y, modules[i][j].w, modules[i][j].h);
+        canvas.rect(modules[i][j].x, modules[i][j].y, modules[i][j].w, modules[i][j].h);
       } 
     }
   }
