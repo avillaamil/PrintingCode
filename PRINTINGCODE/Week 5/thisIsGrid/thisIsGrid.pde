@@ -22,6 +22,7 @@ void setup() {
 
   // create a grid object as a container for our grid variables
   ModularGrid grid = new ModularGrid(3, 6, 100, 1500);
+  ModularGrid gridOverlap = new ModularGrid(2, 1, 100, 1500);
 
   canvas.beginDraw();
   canvas.background(255);
@@ -56,6 +57,8 @@ void setup() {
   Module seventeenModule = grid.modules[2][4];
   Module eighteenModule = grid.modules[2][5];
 
+  Module leftModule = gridOverlap.modules[0][0];
+  Module rightModule = gridOverlap.modules[1][0];
 
   // ................text example......................
   //canvas.fill(0);
@@ -68,22 +71,68 @@ void setup() {
 
   // .......................drawing time.....................................
 
-  canvas.ellipse(randomModule.x, randomModule.y, 200, 200);
-
-  canvas.ellipse(oneModule.x, oneModule.y, 100, 100);
-  
-  canvas.fill(0);
-  canvas.rect(sixteenModule.x, eightModule.y, eightModule.w, eightModule.h);
 
 
+  canvas.fill(188, 0, 57);
+  canvas.noStroke();
+  //canvas.rect(sevenModule.x, sevenModule.y, sevenModule.w, sevenModule.h);
+  canvas.triangle(sevenModule.x, sevenModule.y, sevenModule.x+320, sevenModule.y+540, sevenModule.x+630, sevenModule.y);
+
+  canvas.strokeWeight(4);
+  canvas.stroke(0);
+  canvas.noFill();
+  canvas.triangle(eightModule.x, eightModule.y, eightModule.x+320, eightModule.y+540, eightModule.x+630, eightModule.y);
+  canvas.triangle(eightModule.x, eightModule.y+150, eightModule.x+320, eightModule.y+540, eightModule.x+630, eightModule.y+150);
+
+  canvas.triangle(nineModule.x+200, nineModule.y, nineModule.x+320, nineModule.y+340, nineModule.x+430, nineModule.y);
+  canvas.triangle(nineModule.x+150, nineModule.y+50, nineModule.x+320, nineModule.y+440, nineModule.x+480, nineModule.y+50);
+  canvas.triangle(nineModule.x, nineModule.y+550, nineModule.x+320, nineModule.y+445, nineModule.x+630, nineModule.y+550);
+
+  //canvas.fill(0, 98, 55);
+  canvas.fill(35, 95, 68);
+  canvas.noStroke();
+  canvas.triangle(twelveModule.x, twelveModule.y, twelveModule.x+630, twelveModule.y+550, twelveModule.x+630, twelveModule.y);
+  canvas.triangle(elevenModule.x, elevenModule.y, elevenModule.x, elevenModule.y+550, elevenModule.x+630, elevenModule.y+550);
+  canvas.triangle(fiveModule.x, fiveModule.y, fiveModule.x+630, fiveModule.y+550, fiveModule.x+630, fiveModule.y);
 
 
+  canvas.noFill();
+  canvas.strokeWeight(4);
+  canvas.stroke(0);
+  canvas.triangle(sixModule.x, sixModule.y, sixModule.x, sixModule.y+550, sixModule.x+630, sixModule.y+550);
+  canvas.triangle(sixModule.x+200, sixModule.y+100, sixModule.x+200, sixModule.y+350, sixModule.x+500, sixModule.y+350);
+  canvas.triangle(eighteenModule.x, eighteenModule.y, eighteenModule.x, eighteenModule.y+550, eighteenModule.x+630, eighteenModule.y+550);
+  canvas.triangle(eighteenModule.x+300, eighteenModule.y, eighteenModule.x+630, eighteenModule.y, eighteenModule.x+630, eighteenModule.y+300);
+  canvas.triangle(fourModule.x, fourModule.y+550, fourModule.x+630, fourModule.y, fourModule.x+630, fourModule.y+550);
 
+  canvas.triangle(tenModule.x, tenModule.y, tenModule.x+320, tenModule.y+200, tenModule.x+630, tenModule.y);
+  canvas.triangle(tenModule.x, tenModule.y+550, tenModule.x+320, tenModule.y+350, tenModule.x+630, tenModule.y+550);
+  //canvas.line(tenModule.x+200, tenModule.y+270, tenModule.x+440, tenModule.y+270);
+
+
+  canvas.triangle(oneModule.x, oneModule.y, oneModule.x+500, oneModule.y+200, oneModule.x+630, oneModule.y);
+  canvas.triangle(oneModule.x, oneModule.y, oneModule.x+500, oneModule.y+200, oneModule.x+630, oneModule.y+550);
+
+  canvas.fill(110, 131, 122);
+  canvas.noStroke();
+  canvas.triangle(fifteenModule.x, fifteenModule.y+550, fifteenModule.x+630, fifteenModule.y, fifteenModule.x+630, fifteenModule.y+550);
+  canvas.triangle(fourteenModule.x, fourteenModule.y, fourteenModule.x+630, fourteenModule.y+550, fourteenModule.x+630, fourteenModule.y);
+
+  canvas.noFill();
+  canvas.strokeWeight(4);
+  canvas.stroke(0);
+  canvas.triangle(twoModule.x, twoModule.y, twoModule.x+630, twoModule.y+270, twoModule.x, twoModule.y+550);
+  //canvas.triangle(twoModule.x, twoModule.y, twoModule.x, twoModule.y+550, twoModule.x+630, twoModule.y+550);
+
+  //canvas.triangle(sixteenModule.x+630, sixteenModule.y, sixteenModule.x, sixteenModule.y+270, sixteenModule.x+630, sixteenModule.y+550);
+  canvas.triangle(sixteenModule.x, sixteenModule.y, sixteenModule.x+630, sixteenModule.y, sixteenModule.x, sixteenModule.y+270);
+  canvas.triangle(sixteenModule.x, sixteenModule.y+550, sixteenModule.x, sixteenModule.y+270, sixteenModule.x+630, sixteenModule.y+550);
 
   // FUNCTION HIDING GRID
   // ......... .......... comment this out to hide the grid!!!!!
   // FUNCTION HIDING GRID
-  grid.display();
+  //grid.display();
+  // gridOverlap.display();
 
 
 
@@ -100,8 +149,9 @@ void setup() {
   // draw canvas on the screen
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-  canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
-  canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
+  canvas.save("gridtesting.png" );
+  // canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
+  //canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
 }
 
 /*  Calculate resizing function
