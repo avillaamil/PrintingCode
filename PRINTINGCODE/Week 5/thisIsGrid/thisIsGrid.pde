@@ -22,7 +22,7 @@ void setup() {
 
   // create a grid object as a container for our grid variables
   ModularGrid grid = new ModularGrid(3, 6, 100, 1500);
-  ModularGrid gridOverlap = new ModularGrid(2, 1, 100, 1500);
+  ModularGrid gridOverlap = new ModularGrid(2, 1, 100, 1000);
 
   canvas.beginDraw();
   canvas.background(255);
@@ -71,7 +71,16 @@ void setup() {
 
   // .......................drawing time.....................................
 
+canvas.fill(0, 2);
+canvas.noStroke();
+//canvas.triangle(rightModule.x, rightModule.y, rightModule.x+1500, rightModule.y+2400, rightModule.x, rightModule.y+4800);
+canvas.triangle(leftModule.x, leftModule.y+2400, rightModule.x+1500, rightModule.y+4800, leftModule.x, leftModule.y+4800);
 
+canvas.triangle(rightModule.x+1500, rightModule.y, rightModule.x+1500, rightModule.y+2400, leftModule.x, leftModule.y);
+
+
+//canvas.triangle(rightModule.x+1500, rightModule.y+2400, rightModule.x+1500, leftModule.y, leftModule.x, leftModule.y+2400);
+//canvas.triangle(rightModule.x, rightModule.y+2500, rightModule.x+1500, rightModule.y+4800, leftModule.x, leftModule.y+4800);
 
   canvas.fill(188, 0, 57);
   canvas.noStroke();
@@ -132,7 +141,7 @@ void setup() {
   // ......... .......... comment this out to hide the grid!!!!!
   // FUNCTION HIDING GRID
   //grid.display();
-  // gridOverlap.display();
+  //gridOverlap.display();
 
 
 
@@ -149,7 +158,9 @@ void setup() {
   // draw canvas on the screen
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-  canvas.save("gridtesting.png" );
+  canvas.save("gridwithoverlap3.png" );
+    canvas.save("grabgrid.tiff" );
+
   // canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
   //canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
 }
@@ -167,5 +178,5 @@ void calculateResizeRatio()
 }
 
 
-//        8==D ~~~
+
 
