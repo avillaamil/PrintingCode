@@ -1,4 +1,8 @@
 import geomerative.*;
+import org.apache.batik.svggen.font.table.*;
+import org.apache.batik.svggen.font.*;
+
+
 
 PGraphics canvas;
 int canvas_height = 5100;
@@ -14,16 +18,16 @@ float ratio = 1;
 void setup() { 
   size(1300, 850);
   background(100);
-  smooth();
+  smooth(4);
 
   // create canvas & resize
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
   
   int[] colors = {#f1c677, #c64f62, #bc202e, #8da196, #35674a, #ee2535, #42c3d6, #f34d25, #e1e52c, #c84392};
-  //float logoSize = 500;
-  //int largeFlare = 300;
-  //String charToDraw = "COLONY";
+  float logoSize = 2000;
+  int largeFlare = 300;
+  String charToDraw = "COLONY";
   
 
   
@@ -33,47 +37,41 @@ void setup() {
   canvas.background(255);
   canvas.smooth(8);
   
-  //int fontSize = 500;
+  int fontSize = 950;
   
   // TEXT STUFF
-  int fontX = canvas.width/2;
-  int fontY = canvas.height / 2;
-  int fontHeight = 600;
-  PFont code = createFont("Code-Pro-Demo", fontHeight);
-  textFont(code);
-  String sentence = "COLONY";
-  float fontWidth = textWidth(sentence);
+ //initializing library
+  RG.init(this);
+  RFont font = new RFont ("Code_Pro_Demo-webfont.ttf", 500, RFont.LEFT);
+  RCommand.setSegmentLength(5);
+  RCommand.setSegmentator(RCommand.UNIFORMLENGTH);
 
-  //initializing library
-//  RG.init(this);
-//  RFont font = new RFont ("Code_Pro_Demo-webfont.ttf", 500, RFont.LEFT);
-//  RCommand.setSegmentLength(1);
-//  RCommand.setSegmentator(RCommand.UNIFORMLENGTH);
-//
-//  RGroup grp;
-//  grp = font.toGroup(charToDraw);
-//  RPoint[] pnts = grp.getPoints();
+  RGroup grp;
+  grp = font.toGroup(charToDraw);
+  RPoint[] pnts = grp.getPoints();
   
 
 // .......................drawing time.....................................
 
   // make logo appear in the middle of the screen
-  //canvas.translate((canvas.width / 2) - (logoSize / 2), (canvas.height / 2) - (logoSize / 2));
+  canvas.translate((canvas.width / 2) - (logoSize / 2), (canvas.height / 2) - (logoSize / 2));
   
-   
+  
   // draw outline of logo to help
   canvas.stroke(150);
   canvas.noFill();
-  //canvas.rect(0, 0, logoSize, logoSize);
+  canvas.rect(0, 0, logoSize, logoSize);
   
-  // text 
-  //canvas.translate(300, 300);
-  //font.draw("Hello World!");
+  // text
+//  for (int i=0; i<pnts.length; i++) {
+//    canvas.strokeWeight(4);
+//    canvas.stroke(0);
+//    canvas.ellipse(pnts[i].x, pnts[i].y, 5,5);
+//  }
+  //canvas.draw(charToDraw);
   
-  canvas.translate(fontX, fontY);
-  canvas.fill(30);
-  canvas.text(sentence, 0,0);
   
+
   
 
 // .......................blabla blablablabla............................
