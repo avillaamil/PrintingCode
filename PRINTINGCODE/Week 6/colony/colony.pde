@@ -31,8 +31,8 @@ void setup() {
 
   String charToDraw = "COLONY";
   
-//  xDirection = int(random(-150, 250));
-//  yDirection = int(random(-150, 250));
+  xDirection = int(random(-150, 250));
+  yDirection = int(random(-150, 250));
 
   
  // ............. ~~~ CANVAS IS BEGINNING ~~~ .................
@@ -58,7 +58,7 @@ void setup() {
   canvas.fill(0);
   font.draw("COLONY", canvas);
   
-  for (int i=0; i<9; i++);{
+  for (int i=0; i<5; i++);{
     float ran = random(0, 100);
     
     if (ran > 50) {
@@ -78,6 +78,7 @@ void setup() {
 void drawEllipse(){
   canvas.fill(0, 50);
   canvas.ellipse(x,y,150,150);
+  //randomize size later                              <---- randomize size later
 }
 
 void drawHex(){
