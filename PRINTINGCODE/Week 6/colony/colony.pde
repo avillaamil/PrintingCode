@@ -4,7 +4,7 @@ import org.apache.batik.svggen.font.*;
 
 PGraphics canvas;
 int canvas_height = 5100;
-int canvas_width = 6800;
+int canvas_width = 5100;
 
 float ratioWidth = 1;
 float ratioHeight = 1;
@@ -31,8 +31,8 @@ void setup() {
 
   String charToDraw = "COLONY";
   
-  xDirection = int(random(-150, 250));
-  yDirection = int(random(-150, 250));
+//  xDirection = int(random(-150, 250));
+//  yDirection = int(random(-150, 250));
 
   
  // ............. ~~~ CANVAS IS BEGINNING ~~~ .................
@@ -41,11 +41,12 @@ void setup() {
   canvas.background(255);
   canvas.smooth(8);
   
-  int fontSize = 750;
+  int fontSize = 550;
   
   // TEXT STUFF
   RG.init(this);
-  RFont font = new RFont ("Code_Pro_Demo-webfont.ttf", fontSize, RFont.LEFT);  
+  //RFont font = new RFont ("Code_Pro_Demo-webfont.ttf", fontSize, RFont.CENTER);  
+  RFont font = new RFont ("Neou-Thin.ttf", fontSize, RFont.CENTER);  
 
 // .......................drawing time.....................................
 
@@ -53,22 +54,19 @@ void setup() {
   
 // TEXT
 // so we're translating above here so everything is now relative to this new origin point (0,0)
-  canvas.pushMatrix();
-  canvas.translate(-1500, 0);
+  canvas.translate(0, 0);
   canvas.fill(0);
   font.draw("COLONY", canvas);
-  canvas.popMatrix();
   
-  for (int i=0; i<5; i++);{
+  for (int i=0; i<9; i++);{
     float ran = random(0, 100);
-    drawEllipse();
     
-//    if (ran > 150){
-//      drawEllipse();
-//    }
-//    else {
-//      drawHex();
-//    }
+    if (ran > 50) {
+      drawEllipse();
+    }
+    else {
+      drawHex();
+    }
     
     x += xDirection + random(0, 150);
     y += yDirection + random(0, 150);
@@ -78,26 +76,28 @@ void setup() {
   // SHAPE FUNCTIONS
 
 void drawEllipse(){
-  fill(50, 20);
+  canvas.fill(0, 50);
   canvas.ellipse(x,y,150,150);
 }
 
 void drawHex(){
   // we're translating to x & y just as ellipse takes x & y as coordinate points
   canvas.translate(x, y);
-  canvas.fill(30, 10);
-  float numVertices = 6;
+  canvas.noStroke();
+  canvas.fill(0, 30);
+  int numVertices = int (random(5, 6));
   float vertexDegree = 360 / numVertices;
-  float shapeRadius = random(50, 100);
+  float shapeRadius = random(200, 300);
   
-  beginShape();
+  canvas.beginShape();
   for(int i = 0; i < numVertices; i++)
   {
     float x = cos(radians(i * vertexDegree)) * shapeRadius;
     float y = sin(radians(i * vertexDegree)) * shapeRadius;
-    vertex(x, y);
+    canvas.vertex(x, y);
   }
-  endShape();
+  canvas.endShape();
+
 
     
 
@@ -112,7 +112,7 @@ void drawHex(){
   // draw canvas on the screen
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-    //canvas.save("logotests.tiff" );
+    canvas.save("logotests.tiff" );
     //canvas.save("logotests.png" );
    // canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
   //canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
