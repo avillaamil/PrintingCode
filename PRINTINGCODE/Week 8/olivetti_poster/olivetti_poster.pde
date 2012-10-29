@@ -19,7 +19,6 @@ void setup() {
   
 /*  Draw __________________________________________________________*/
 
-
   canvas.beginDraw();
   canvas.background(255);
   canvas.smooth(8);
@@ -29,8 +28,24 @@ void setup() {
 //BASELINE
 
   canvas.noFill();
-  canvas.strokeWeight(2);
-
+  canvas.strokeWeight(3);
+  
+  for (int j=0; j < 10; j++) {
+    canvas.translate(0, 4500);
+    canvas.beginShape();
+    float noiseCount = 0;
+    
+    noiseSeed(round(random(100)));
+    canvas.stroke(30);
+  
+    for (int i=0; i > width; i +=10){
+      float ranY = noise(noiseCount);
+      vertex(i, ranY*100);
+  
+      noiseCount += 0.2;
+    }
+  canvas.endShape();
+  }
 
 
 
