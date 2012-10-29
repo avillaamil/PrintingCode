@@ -11,9 +11,13 @@ float ratioHeight = 1;
 float ratio = 1;
 
 int x=0;
-int y=0;
+int y= height/2-700;
 int xDirection = 0;
 int yDirection = 0;
+float xEarth;
+
+float ranStar = random(0, 5100);
+
 
 /*  SET UPS
  _________________________________________________________________ */
@@ -26,107 +30,106 @@ void setup() {
   // create canvas & resize
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
-  
+
   //int[] colors = {#f1c677, #c64f62, #bc202e, #8da196, #35674a, #ee2535, #42c3d6, #f34d25, #e1e52c, #c84392};
 
   //String charToDraw = "COLONY";
-  
-  xDirection = int(random(-150, 250));
-  yDirection = int(random(-150, 250));
 
-  
- // ............. ~~~ CANVAS IS BEGINNING ~~~ .................
-  
+  xDirection = int(random(-150, 250));
+  //yDirection = int(random(-150, 250));
+
+
+  // ............. ~~~ CANVAS IS BEGINNING ~~~ .................
+
   canvas.beginDraw();
-  canvas.background(255);
+  canvas.background(30);
   canvas.smooth(8);
-  
+
   int fontSize = 550;
   int fontSize2 = 105;
-  
+
   // TEXT STUFF
   RG.init(this);
   //RFont font = new RFont ("Code_Pro_Demo-webfont.ttf", fontSize, RFont.CENTER);  
   RFont font = new RFont ("Neou-Thin.ttf", fontSize, RFont.CENTER);  
-  RFont font2 = new RFont ("code_pro_light.ttf", fontSize2, RFont.CENTER);  
+  RFont font2 = new RFont ("code_pro_light.ttf", fontSize2, RFont.CENTER); 
+  // using a different font here because neou-thin has a weird artifcat in the "D" 
 
-// .......................drawing time.....................................
+  // .......................drawing time.....................................
 
-   canvas.translate(canvas.width / 2, canvas.height / 2);
-   // so we're translating above here so everything is now relative to this new origin point (0,0)
+  canvas.translate(canvas.width / 2, canvas.height / 2);
+  // so we're translating above here so everything is now relative to this new origin point (0,0)
 
-  
-// ~*~*~*~*~*TEXT*~*~*~*~*~**~
+
+  // ~*~*~*~*~*TEXT*~*~*~*~*~**~
 
   // TITLE TEXT
   canvas.pushMatrix();
   canvas.translate(0, 1700);
-  canvas.fill(0);
+  canvas.fill(255);
   font.draw("COLONY", canvas);
   canvas.popMatrix();
-  
+
   // SUB TEXT
   canvas.pushMatrix();
   canvas.translate(0, 1900);
-  canvas.fill(0);
+  canvas.fill(255);
   canvas.noStroke();
   font2.draw("PROPERTY DEVELOPMENT ON OTHER PLANETS", canvas);
   canvas.popMatrix();
-  
+
   // large planet
   canvas.noFill();
-  canvas.stroke(0);
+  canvas.stroke(255);
   canvas.strokeWeight(3);
   canvas.ellipseMode(CENTER);
   canvas.ellipse(0, 3255, 5300, 5300);
-  
-  
-  for (int i=0; i<5; i++);{
-    float ran = random(0, 100);
-    
-    if (ran > 50) {
-      drawEllipse();
-    }
-    else {
-      drawHex();
-    }
-    
-    x += xDirection + random(0, 150);
-    y += yDirection + random(0, 150);
-  }
-}
 
-  // SHAPE FUNCTIONS
+  // STARS
+//  for (int i=0; i<100; i++);
+//  {
+//    canvas.fill(255);
+//    canvas.noStroke();
+//    canvas.ellipse(ranStar, ranStar, 15, 15);
+//  }
 
-void drawEllipse(){
-  canvas.fill(0, 50);
-  canvas.ellipse(x,y,150,150);
-  //randomize size later                              <---- randomize size later
-}
 
-void drawHex(){
-  // we're translating to x & y just as ellipse takes x & y as coordinate points
-  canvas.translate(x, y);
-  canvas.noStroke();
-  canvas.fill(0, 30);
-  int numVertices = int (random(5, 6));
-  float vertexDegree = 360 / numVertices;
-  float shapeRadius = random(200, 300);
-  
-  canvas.beginShape();
-  for(int i = 0; i < numVertices; i++)
+  //  for (int i=0; i<5; i++);{
+  //    float ran = random(0, 100);
+  //    
+  //    if (ran > 50) {
+  //      drawEllipse();
+  //    }
+  //    else {
+  //      drawHex();
+  //    }
+  //    
+  //    x += xDirection + random(0, 150);
+  //    y += yDirection + random(0, 150);
+  //  }
+
+  for (int i=0; i<5; i++);
   {
-    float x = cos(radians(i * vertexDegree)) * shapeRadius;
-    float y = sin(radians(i * vertexDegree)) * shapeRadius;
-    canvas.vertex(x, y);
+    float ran = random(0, 100);
+
+    drawEllipse();
+    drawMoon();
+
+    //    x += xDirection + random(0, 150);
+    //    y += yDirection + random(0, 150);
   }
-  canvas.endShape();
 
 
-    
 
-// .......................blabla blablablabla............................
-  
+
+
+
+
+
+
+
+  // .......................blabla blablablabla............................
+
   canvas.endDraw();
 
   // what is resized canvas size?
@@ -136,17 +139,18 @@ void drawHex(){
   // draw canvas on the screen
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-    canvas.save("logotests.tiff" );
-    //canvas.save("logotests.png" );
-   // canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
-  //canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
+  //canvas.save("logotests.tiff" );
+  //canvas.save("logotests.png" );
+  canvas.save("grid"+year()+day()+hour()+minute()+second()+".png");
+  canvas.save("grid"+year()+day()+hour()+minute()+second()+".tff");
 }
+
+// setup gets closed with this bracket
 
 /*  Calculate resizing function
  _________________________________________________________________ */
 
-void calculateResizeRatio()
-{
+void calculateResizeRatio() {
   ratioWidth = (float) width / (float) canvas.width;
   ratioHeight = (float) height / (float) canvas.height;
 
@@ -154,4 +158,38 @@ void calculateResizeRatio()
   else                          ratio = ratioHeight;
 }
 
+
+// SHAPE FUNCTIONS
+
+void drawEllipse() {
+  canvas.fill(30);
+  xEarth = (random(200, 4900));
+  canvas.ellipse(xEarth, y, 150, 150);
+  //                                                            <---- randomize size later
+}
+
+void drawHex() {
+  // we're translating to x & y just as ellipse takes x & y as coordinate points
+  canvas.translate(x, y);
+  canvas.noStroke();
+  canvas.fill(0, 30);
+  int numVertices = int (random(5, 6));
+  float vertexDegree = 360 / numVertices;
+  float shapeRadius = random(200, 300);
+
+  canvas.beginShape();
+
+  for (int i = 0; i < numVertices; i++) {
+    float x = cos(radians(i * vertexDegree)) * shapeRadius;
+    float y = sin(radians(i * vertexDegree)) * shapeRadius;
+    canvas.vertex(x, y);
+  }
+
+  canvas.endShape();
+}
+
+void drawMoon() {
+  canvas.fill(30);
+  canvas.ellipse(xEarth +100, y-100, 50, 50);
+}
 
