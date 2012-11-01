@@ -36,23 +36,25 @@ void setup() {
   canvas.stroke(30);
   
   //for (int j=0; j < 10; j++) {
-    canvas.translate(0,3000);
+    canvas.translate(-1000,3000);
 
     float noiseCount = 0;
     
-    for(int i=0; i < canvas.width+100; i +=200) {
+    for(int i=0; i < canvas.width+5000; i +=2000) {
       noisePoints.add(new PVector(i, noise(noiseCount)*100));
     }
-    
+    println(noisePoints.size());
     canvas.beginShape();
     for(int i=0; i < noisePoints.size(); i++){
       
       // this is making the Y coordinate of the vertex random
       noiseSeed(round(random(100)));
-      float ranY = noise(noiseCount);
-      
+     //noiseSeed(20);
+     float ranY = noise(noiseCount)*random(100.0,1000.0);
+      println("i am ranY:"+ranY);
       // this is what draws the line
-      canvas.vertex(noisePoints.get(i).x, (noisePoints.get(i).y*ranY));
+      //canvas.vertex(noisePoints.get(i).x, (noisePoints.get(i).y));
+      canvas.vertex(noisePoints.get(i).x + ranY, (noisePoints.get(i).y + ranY ));
     }
     canvas.endShape();
     
