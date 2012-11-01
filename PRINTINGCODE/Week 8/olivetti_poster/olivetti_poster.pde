@@ -6,6 +6,10 @@ float ratioWidth = 1;
 float ratioHeight = 1;
 float ratio = 1;
 
+
+//ArrayList<NoisePoints> points = new ArrayList();
+
+ArrayList<NoisePoints> points = new ArrayList();
 /*  Setup
  _________________________________________________________________ */
 
@@ -30,22 +34,24 @@ void setup() {
   canvas.noFill();
   canvas.strokeWeight(3);
   
-  for (int j=0; j < 10; j++) {
-    canvas.translate(0, 4500);
+  //for (int j=0; j < 10; j++) {
+    canvas.translate(0,3000);
     canvas.beginShape();
     float noiseCount = 0;
     
     noiseSeed(round(random(100)));
     canvas.stroke(30);
   
-    for (int i=0; i > width; i +=10){
+    for (int i=0; i < canvas.width+ 100; i +=200){
       float ranY = noise(noiseCount);
-      vertex(i, ranY*100);
+      canvas.vertex(i, ranY*550);
+      NoisePoints p = points.get(i);  
+
   
       noiseCount += 0.2;
     }
   canvas.endShape();
-  }
+  
 
 
 
@@ -57,7 +63,7 @@ void setup() {
 
   image(canvas, (width / 2) - (resizedWidth / 2), (height / 2) - (resizedHeight / 2), resizedWidth, resizedHeight);
 
-  //canvas.save("olivetti.png");
+  canvas.save("olivetti.png");
   //canvas.save("olivetti.tiff");
   //canvas.save("olivetti"+year()+day()+hour()+minute()+second()+".tff");
 }
