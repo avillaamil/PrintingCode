@@ -9,7 +9,7 @@ float ratio = 1;
 
 //ArrayList<NoisePoints> points = new ArrayList();
 
-ArrayList<NoisePoints> points = new ArrayList();
+ArrayList<NoisePoints> points;
 /*  Setup
  _________________________________________________________________ */
 
@@ -18,6 +18,8 @@ void setup() {
   background(100);
   smooth();
 
+  points = new ArrayList();
+  
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
   
@@ -45,7 +47,7 @@ void setup() {
     for (int i=0; i < canvas.width+ 100; i +=200){
       float ranY = noise(noiseCount);
       canvas.vertex(i, ranY*550);
-      NoisePoints p = points.get(i);  
+      hexagons.get(i);  
 
   
       noiseCount += 0.2;
