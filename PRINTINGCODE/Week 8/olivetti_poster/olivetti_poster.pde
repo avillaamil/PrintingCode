@@ -9,7 +9,7 @@ float ratio = 1;
 
 //ArrayList<NoisePoints> points = new ArrayList();
 
-ArrayList<NoisePoints> points;
+ArrayList<PVector> noisePoints =  new ArrayList();
 /*  Setup
  _________________________________________________________________ */
 
@@ -17,8 +17,6 @@ void setup() {
   size(1300, 850);
   background(100);
   smooth();
-
-  points = new ArrayList();
   
   canvas = createGraphics(canvas_width, canvas_height);
   calculateResizeRatio();
@@ -35,24 +33,43 @@ void setup() {
 
   canvas.noFill();
   canvas.strokeWeight(3);
+  canvas.stroke(30);
   
   //for (int j=0; j < 10; j++) {
     canvas.translate(0,3000);
-    canvas.beginShape();
+
     float noiseCount = 0;
     
-    noiseSeed(round(random(100)));
-    canvas.stroke(30);
-  
-    for (int i=0; i < canvas.width+ 100; i +=200){
-      float ranY = noise(noiseCount);
-      canvas.vertex(i, ranY*550);
-      hexagons.get(i);  
-
-  
-      noiseCount += 0.2;
+    for(int i=0; i < canvas.width+100; i +=200) {
+      noisePoints.add(new PVector(i, noise(noiseCount)*100));
     }
-  canvas.endShape();
+    
+    canvas.beginShape();
+    for(int i=0; i < noisePoints.size(); i++){
+      
+      // this is making the Y coordinate of the vertex random
+      noiseSeed(round(random(100)));
+      float ranY = noise(noiseCount);
+      
+      // this is what draws the line
+      canvas.vertex(noisePoints.get(i).x, (noisePoints.get(i).y*ranY));
+    }
+    canvas.endShape();
+    
+    
+    
+//    noiseSeed(round(random(100)));
+//    canvas.stroke(30);
+//  
+//    for (int i=0; i < canvas.width+ 100; i +=200){
+//      float ranY = noise(noiseCount);
+//      canvas.vertex(i, ranY*550);
+//      hexagons.get(i);  
+//
+//  
+//      noiseCount += 0.2;
+//    }
+//  canvas.endShape();
   
 
 
