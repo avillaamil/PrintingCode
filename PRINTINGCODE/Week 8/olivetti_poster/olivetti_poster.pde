@@ -11,6 +11,7 @@ float ratio = 1;
 //ArrayList<NoisePoints> points = new ArrayList();
 
 ArrayList<PVector> noisePoints =  new ArrayList();
+ArrayList<Rectangle> rectangles = new ArrayList();
 /*  Setup  _________________________________________________________________ */
 
 void setup() { 
@@ -38,12 +39,12 @@ void setup() {
   canvas.ellipseMode(CENTER);
 
 
-  canvas.translate(-1000, 3000);
+  canvas.translate(0, 3000);
   float noiseCount = 0;
 
   // SAVING the points for the line
 
-  for (int i=0; i < canvas.width+5000; i +=900) {   // this determines how jagged the line gets
+  for (int i=0; i <= canvas.width; i += 680) {   // this determines how jagged the line gets
     noisePoints.add(new PVector(i, noise(noiseCount)*random(100.0, 1000.0)));
   }
   //println(noisePoints.size());
@@ -62,17 +63,35 @@ void setup() {
   // dpopMatrix(); draw the rectangles here
 
     // do this 5 times in a loop
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < noisePoints.size()-1; i++)
   {
-    int ranNum = int(random(0, noisePoints.size() - 1));
-    PVector pointOne = noisePoints.get(ranNum);
-    PVector pointTwo = noisePoints.get(ranNum + 1);
+    Vec2D leftTop;
+    Vec2D leftBottom;
+    if ( i > 0) {
+      Rectangle leftRectangle = rectangles.get(i-1);
+      leftBottom = new Vec2D (leftRectangle.x2, leftRectangle.y2);
+      leftTop = new Vec2D (leftRectangle.x4, leftRectangle.y4);
+    } 
+    else {
+      leftTop = new Vec2D(0, 0);
+      leftBottom = new Vec2D(0, canvas.height);
+    }
+    Line2D leftEdge = new Line2D(leftTop, leftBottom);
+
+    PVector pointOne = noisePoints.get(i);
+    PVector pointTwo = noisePoints.get(i + 1);
 
     canvas.noStroke();
     canvas.fill(0, 255, 0, 30);
-    canvas.ellipse(pointOne.x, pointOne.y, 900, 900);
+    //canvas.ellipse(pointOne.x, pointOne.y, 1300, 1300);
 
     // create a rectangle object from these two points
+
+    Rectangle someRect= new Rectangle(pointOne.x, pointOne.y, pointTwo.x, pointTwo.y);
+    rectangles.add(someRect);
+    someRect.display(leftEdge);
+
+
     // call display on the rectangle object
   }
 
