@@ -1,3 +1,4 @@
+
 PGraphics canvas;
 int canvas_width = 6800;
 int canvas_height = 5100;
@@ -28,6 +29,7 @@ void setup() {
 
   // ~~~~~~~~~~~~~~~~~~ drawing time ~~~~~~~~~~~~~~~~~~~~
 
+
   //BASELINE
 
   canvas.noFill();
@@ -35,44 +37,46 @@ void setup() {
   canvas.stroke(30);
   canvas.ellipseMode(CENTER);
 
-  //for (int j=0; j < 10; j++) {
-  canvas.translate(-1000, 3000);
 
+  canvas.translate(-1000, 3000);
   float noiseCount = 0;
 
-  for (int i=0; i < canvas.width+5000; i +=900) {
-    noisePoints.add(new PVector(i, noise(noiseCount)*100));
+  // SAVING the points for the line
+
+  for (int i=0; i < canvas.width+5000; i +=900) {   // this determines how jagged the line gets
+    noisePoints.add(new PVector(i, noise(noiseCount)*random(100.0, 1000.0)));
   }
   //println(noisePoints.size());
- 
+
+  // DRAWING THE LINE
+
   canvas.beginShape();
   for (int i=0; i < noisePoints.size(); i++) {
     noiseSeed(round(random(100)));
-    float ranY = noise(noiseCount)*random(100.0, 1000.0);
-    println("i am ranY:"+ranY);
-    canvas.vertex(noisePoints.get(i).x + ranY, (noisePoints.get(i).y + ranY ));
+    canvas.vertex(noisePoints.get(i).x, (noisePoints.get(i).y));
   }
   canvas.endShape();
-  
-  
-  // draw the rectangles here
-  
+
+
+
+  // dpopMatrix(); draw the rectangles here
+
     // do this 5 times in a loop
-    for(int i = 0; i < 10; i++)
-    {
-      int ranNum = int(random(0, noisePoints.size() - 1));
-      PVector pointOne = noisePoints.get(ranNum);
-      PVector pointTwo = noisePoints.get(ranNum + 1);
-     
-     canvas.noStroke();
-     canvas.fill(0,255,0, 30);
-     canvas.ellipse(pointOne.x, pointOne.y, 900,900);
-    
-      // create a rectangle object from these two points
-      // call display on the rectangle object
-    }
-    
-      
+  for (int i = 0; i < 10; i++)
+  {
+    int ranNum = int(random(0, noisePoints.size() - 1));
+    PVector pointOne = noisePoints.get(ranNum);
+    PVector pointTwo = noisePoints.get(ranNum + 1);
+
+    canvas.noStroke();
+    canvas.fill(0, 255, 0, 30);
+    canvas.ellipse(pointOne.x, pointOne.y, 900, 900);
+
+    // create a rectangle object from these two points
+    // call display on the rectangle object
+  }
+
+
 
 
 

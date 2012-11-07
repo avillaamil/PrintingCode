@@ -12,11 +12,7 @@ class Rectangle {
   float x4;
   float y4;
   
-  float x5;
-  float y5;
-  
-  float x6;
-  float y6;
+
   
   Rectangle(float _x1, float _y1, float _x2, float _y2) {
     
@@ -26,25 +22,29 @@ class Rectangle {
     x2 = _x2;
     y2 = _y2;
     
-    // do all calculaion here
     
       // pick a weighted random height of the rectangle
-      
+      WeightedRandomSet<float> rectHeight = new WeightedRandomSet<float>();
+
+      rectHeight.add(1500);
+      rectHeight.add(1800);      
+      rectHeight.add(2000);      
+      rectHeight.add(2200);      
+     
+    
       // do the math to get the points
       
       // set the points in the variables
     
-    /*x3 = x1;
+    /*
+    
+    x3 = x1 + int(random(-50, 50));    
     y3 = y1 - 500;
     
-    x4 = _x4;
+    x4 = x2 + int(random(-50, 50)); 
     y4 = _y4;
     
-    x5 = _x5;
-    y5 = _y5;
-    
-    x6 = _x6;
-    y6 = _y6;*/
+  */
     
   }
   
@@ -56,9 +56,9 @@ class Rectangle {
 //    
 //    //GREEN
 //    fill(90, 168, 43, 50);
-//    triangle(x1, y1, x2, y2, x3, y3);
+//    triangle(x1, y1, x3, y3, x4, y4);
 //    fill(25, 49, 0, 50);
-//    triangle(x4, y4, x5, y5, x6, y6);
+//    triangle(x2, y2, x3, y3, x4, y4);
 //  
 //  }
 //  
