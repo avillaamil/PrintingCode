@@ -32,20 +32,17 @@ class Rectangle {
       rectHeight.add(1500., 50);
       rectHeight.add(1800., 30);      
       rectHeight.add(2000., 20);      
-      rectHeight.add(-1200., 10);      
+      rectHeight.add(1200., 10);      
      
     
-      // do the math to get the points
-      
-      // set the points in the variables
-      
-      //PVector leftTop  = new PVector(leftXT,  leftYT);    //Left Top of section
 
-    float sometimes = random();
+      
+   
+   // float colorVariable = random();
     
-    if (sometimes < 0.2) {
+    //if (colorVariable < 0.2) {
       // make it lower. 
-    }
+    //}
     
     x3 = x1 + int(random(-550, 550));    
     y3 = y1 - rectHeight.getRandom();
@@ -62,11 +59,7 @@ class Rectangle {
   
   
   void display(Line2D leftEdge) {
-//    
-//    //create nested if statement for 4 conditionals: green, yellow, red, blue/gray
-//    
-//    //GREEN
-
+    
     Vec2D lefty3 = new Vec2D(0, y3);
     Vec2D righty3 = new Vec2D(canvas.width, y3);
 
@@ -78,13 +71,12 @@ class Rectangle {
     println("hi");
     x3 = intersection.getPos().x;
 
-    canvas.fill(90, 168, 43, 50);
+    canvas.fill(215, 227, 234, 200);
     canvas.triangle(x1, y1, x3, y3, x4, y4);
-    canvas.fill(25, 49, 0, 50);
+    canvas.fill(39, 81, 120, 100);
     canvas.triangle(x2, y2, x3, y3, x4, y4);
-//  
- }
-//  
+ 
+ }  
 }
 
   

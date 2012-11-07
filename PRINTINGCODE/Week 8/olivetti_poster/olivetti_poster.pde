@@ -7,11 +7,9 @@ float ratioWidth = 1;
 float ratioHeight = 1;
 float ratio = 1;
 
-
-//ArrayList<NoisePoints> points = new ArrayList();
-
 ArrayList<PVector> noisePoints =  new ArrayList();
 ArrayList<Rectangle> rectangles = new ArrayList();
+
 /*  Setup  _________________________________________________________________ */
 
 void setup() { 
@@ -91,17 +89,7 @@ void setup() {
     rectangles.add(someRect);
     someRect.display(leftEdge);
 
-
-    // call display on the rectangle object
   }
-
-
-
-
-
-
-
-
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   canvas.endDraw();
