@@ -83,16 +83,48 @@ void setup() {
   shapePoints.add(new PVector(2300, 2000));
   shapePoints.add(new PVector(2200, 2200));
   shapePoints.add(new PVector(2200, 2200));
+  
+  // randomize
+  for (int i = shapePoints.size()-1; i > 0; i--) {
+    float myX;
+    float myY;
+    //for(int k = 0; k <= 200; k++) {
+    shapePoints.get(i).x = shapePoints.get(i).x + random(-200, 200);
+    shapePoints.get(i).y = shapePoints.get(i).y + random(-200, 200);
+      
+    myX = lerp(shapePoints.get(i).x, shapePoints.get(i-1).x, (i/shapePoints.size()));
+    myY= lerp(shapePoints.get(i).y, shapePoints.get(i-1).y, (i/shapePoints.size()));
+      canvas.strokeWeight(5);
+      canvas.stroke(255, 0 ,0);
+      canvas.fill(255);
+    //canvas.rect(myX, myY, 50, 50);
+    
+        for (int j=0; j < 100; j++) {
+      canvas.stroke(0);
+      canvas.strokeWeight(6);
+      canvas.fill(0);
+      canvas.point(myX + random(-200, 200) , myY + random(-200, 200) );
+ 
+      //}
+    }
+   }
+  
+ 
+
+  
 
   //OUTERSHAPE
   canvas.stroke(100);
   canvas.noFill();
   canvas.strokeWeight(8);
-  canvas.beginShape();
+    canvas.beginShape();
   for (int i=0; i < shapePoints.size(); i++) {
     canvas.curveVertex(shapePoints.get(i).x, shapePoints.get(i).y);
   }
-  canvas.endShape();
+    canvas.endShape();
+    
+  //POINTCLOUD
+ 
   
   //TRIANGLES
   canvas.beginShape();
